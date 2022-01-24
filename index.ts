@@ -50,7 +50,7 @@ function setOption(options: object): string[] { //اینجا خروجی باید
     return ownProprties
 }
 
-console.log(setOption({ asd: 's', gr: 2, isActive: true }));
+console.log(setOption({asd: 's', gr: 2, isActive: true}));
 
 function printer(data: string): void {//چون نوع تابع به صورت void تعریف شده نمیتواند مقدار برگشتی داشته باشد و خطا میدهد
     // return data
@@ -78,7 +78,6 @@ function generateUniqID() {
 console.log(generateUniqID());
 
 
-
 //union types
 //این متغییر میتواند فقط استرینگ یا بولین بگیرد هرچی دیگه بگیرد خطا میدهد
 let mngrg: string | boolean = '2'
@@ -87,7 +86,7 @@ function opd(option: object | string): object | string[] {
     return Object.getOwnPropertyNames(option)
 }
 
-console.log(opd({ kj: true }));
+console.log(opd({kj: true}));
 
 
 //چک نوع وردی تابع
@@ -102,7 +101,7 @@ function getAge(age: string | number): number | string {
 console.log(getAge('44'));
 console.log(getAge(23));
 
-//anonymous types   
+//anonymous types
 //در اینجا متغیری تعریف کردیم که فقط میتواند پراپرتی های تعریف شده داخل پرانتز با نوع مشخص شده را دریافت کند
 //اگر پراپرتی اضافه بنویسیم خطا میگیرد
 let todo: { subject: string, status: (string | number), visible: boolean } = {
@@ -118,7 +117,7 @@ function rectangle(point: { x: number, y: number }): number {
     return point.x * point.y
 }
 
-console.log(rectangle({ x: 2, y: 3 }));
+console.log(rectangle({x: 2, y: 3}));
 
 // معمولا از این anonymous type ها استفاده نیمکنیم و از جایگزین ان ها یعنی interface استفاده میکنیم
 
@@ -131,8 +130,8 @@ function signin(user: { email: string, password: string }): { email: string, pas
     }
 }
 
-console.log(signin({ email: 'hhh@yahoo.com', password: '1111' }));
-console.log(signin({ email: 'hhhe@yahoo.com', password: '1111' }));
+console.log(signin({email: 'hhh@yahoo.com', password: '1111'}));
+console.log(signin({email: 'hhhe@yahoo.com', password: '1111'}));
 
 
 //optional proprties
@@ -144,7 +143,7 @@ let mUser: { name: string, family?: string } = {
     // family : 'asd'
 }
 
-//optional proprties and optional parameters
+//optional properties and optional parameters
 //isActive is optional parameters
 function hUser(user: { name: string, age?: string }, isActive?: boolean | string): { name: string, age?: string } {
     return user
@@ -180,18 +179,18 @@ egd = 312
 
 
 //never type
-//در این حالت قرار نیست هیچ مقداری برگردد و قرار است خطایی تولید شود 
+//در این حالت قرار نیست هیچ مقداری برگردد و قرار است خطایی تولید شود
 function catchError(): never {
     throw new Error('error !!!')
 }
+
 //یکی دیگر از کاربردها در حلقه های بینهایت استفاده میشود
 function infinitLoop(): never {
-    while (true) { }
+    while (true) {
+    }
 }
 
 //تفاوت never و void
-
-
 
 
 //assertion types (explicit casting)
@@ -236,8 +235,8 @@ console.log(dur);
 console.log(frm);
 
 //اینو خودم از جاوا اسکریپت نوشتم
-let gh = { lat: '11111111111', lng: '2222222222' }
-let { lng, lat } = gh
+let gh = {lat: '11111111111', lng: '2222222222'}
+let {lng, lat} = gh
 console.log(lat, ' - ', lng);
 
 
@@ -257,8 +256,41 @@ ddd = [44, ...khg]
 //Enum types
 
 // در اینجا به طور پیش فرض خودش از 0 شروع به شماره گذاری میکند (موس روش بیاری میفهمی)
+//enum default
 enum State {
-    Start, Done, Failed, Warinig
+    Start, Done, Failed, Warning
+}
+
+//enum types string
+enum Direction {
+    left = 'left side', right = 'right side', up = 'up side', down = 'down side'
+}
+
+//enum custom numeric
+enum Point {
+    A = 7, B, C, D
+}
+
+//enum const type
+//تفاوت رو در فایل کامپایل شده جاوااسکریپت ببین
+const enum Post {
+    Published, notPublished
 }
 
 console.log(State.Done);
+
+//نحوه جدید پارامترهای فانکشن
+function newTask({subject, state, post}: { subject: string, state: State, direction: Direction , post : Post}): { subject: string, state: State, post : Post } {
+    return {
+        subject,
+        state,
+        post
+    }
+}
+
+console.log(newTask({
+    subject: 'dasd',
+    state: State.Start,
+    direction: Direction.down,
+    post : Post.Published
+}))
