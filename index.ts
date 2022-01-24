@@ -42,7 +42,7 @@ const getFullName = (f: number, a: string): string => {
 console.log(getFullName(1, '3'));
 
 //چون یک آرایه نوعی از آبجکت است اینجا خروجی تابع میتواند آبجکت باشد و مقدار برگشتی آرایه باشد
-// function setOption(options : object) : object{ //اینجا خروجی میتواند آریه ای هر نوع باشد
+// function setOption(options : object) : object{ //اینجا خروجی میتواند آریه ای از هر نوع باشد
 function setOption(options: object): string[] { //اینجا خروجی باید آرایه ای از استرینگ ها باشد
     let ownProprties: string[] = Object.getOwnPropertyNames(options)
     //or
@@ -202,9 +202,63 @@ let mg: any = '22'
 //با اینکار در ظاهر استرینگ هست ولی رفتاری مشابه با یک عدد رو باهاش داریم مثلا به متدهای پیش فرض درون شی اعداد رو این متغیر دسترسی داریم
 let castVar = <number>mg
 //راه دیگر
-let castVar2 = mg as number
+let castVar2 = mg as boolean
 
 
 console.log(typeof castVar, castVar);
 console.log(typeof castVar2, castVar2);
 
+//tuple types
+//در اصل آرایه هایی هستند با مقدارهای مشخص و تایپ های مشخص
+let tuple: [x: number, y: number] = [10, 14]
+
+console.log(tuple);
+
+let iii: [name: string, age: number, active: boolean]
+iii = ['asdasd', 213, false]
+
+console.log(iii, typeof iii);
+
+let fd: [element: any]
+fd = ['asd']
+fd = [tuple]
+console.log(fd, typeof fd);
+
+//optional tuple element
+let stateVideo: [duration: number, format: string | number, title?: string]
+
+stateVideo = [3, 's', 'asd']
+stateVideo = [43, 'gt']
+
+//tuple destructuring
+let [dur, frm] = stateVideo
+console.log(dur);
+console.log(frm);
+
+//اینو خودم از جاوا اسکریپت نوشتم
+let gh = { lat: '11111111111', lng: '2222222222' }
+let { lng, lat } = gh
+console.log(lat, ' - ', lng);
+
+
+//tuple & spread syntax
+//اینجا صرفا فقط نوع داده را انتخاب کردیم
+let ddd: [number, ...string[]]
+ddd = [2, 's', 'w', 'g', '1', '2']
+//اینجا میتوانیم پارامتر دوم هم اصلا وارد نکنیم
+ddd = [2]
+
+let khg: [string, string, string] = ['2', '1', '4']
+
+//در این حالت خاص khg باید spread شود
+ddd = [44, ...khg]
+
+
+//Enum types
+
+// در اینجا به طور پیش فرض خودش از 0 شروع به شماره گذاری میکند (موس روش بیاری میفهمی)
+enum State {
+    Start, Done, Failed, Warinig
+}
+
+console.log(State.Done);
