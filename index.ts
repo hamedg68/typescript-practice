@@ -151,3 +151,60 @@ function hUser(user: { name: string, age?: string }, isActive?: boolean | string
 }
 
 console.log(hUser(mUser));
+
+//undefined and null types
+//نال مقدار دهی میشود ولی undefined پیش فرض است
+let aaa = null
+let bbb
+
+console.log('aaa : ' + aaa, 'bbb : ' + bbb);
+
+//union types
+let uInfo: (object | null | undefined)
+
+if (uInfo !== null && uInfo !== undefined) {
+    console.log('object has proprty');
+}
+
+//any type
+
+//  در این حالت هر مقداری خواستیم میتونیم وارد کنیم بدون خطا در واقع در جاوااسکریپت همه متغیرها حالت any دارد
+let egd: any = 21
+
+egd = true
+egd = 'sd'
+egd = 312
+
+//unknown type
+//تفاوت و شباهت unknown و any
+
+
+//never type
+//در این حالت قرار نیست هیچ مقداری برگردد و قرار است خطایی تولید شود 
+function catchError(): never {
+    throw new Error('error !!!')
+}
+//یکی دیگر از کاربردها در حلقه های بینهایت استفاده میشود
+function infinitLoop(): never {
+    while (true) { }
+}
+
+//تفاوت never و void
+
+
+
+
+//assertion types (explicit casting)
+//تبدیل دیتا تایپ متغیرها به هم دیگر
+
+let mg: any = '22'
+
+//با اینکار در ظاهر استرینگ هست ولی رفتاری مشابه با یک عدد رو باهاش داریم مثلا به متدهای پیش فرض درون شی اعداد رو این متغیر دسترسی داریم
+let castVar = <number>mg
+//راه دیگر
+let castVar2 = mg as number
+
+
+console.log(typeof castVar, castVar);
+console.log(typeof castVar2, castVar2);
+
