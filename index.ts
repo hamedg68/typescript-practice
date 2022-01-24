@@ -135,7 +135,7 @@ console.log(signin({ email: 'hhh@yahoo.com', password: '1111' }));
 console.log(signin({ email: 'hhhe@yahoo.com', password: '1111' }));
 
 
-//optional proprties and optional parameters
+//optional proprties
 
 //در اینجا میتوانیم family را وارد کنیم یا نکنیم
 //اختیاری است
@@ -144,7 +144,9 @@ let mUser: { name: string, family?: string } = {
     // family : 'asd'
 }
 
-function hUser(user: { name: string, age?: string }): { name: string, age?: string } {
+//optional proprties and optional parameters
+//isActive is optional parameters
+function hUser(user: { name: string, age?: string }, isActive?: boolean | string): { name: string, age?: string } {
     return user
 }
 
