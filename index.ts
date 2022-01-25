@@ -50,7 +50,7 @@ function setOption(options: object): string[] { //اینجا خروجی باید
     return ownProprties
 }
 
-console.log(setOption({asd: 's', gr: 2, isActive: true}));
+console.log(setOption({ asd: 's', gr: 2, isActive: true }));
 
 function printer(data: string): void {//چون نوع تابع به صورت void تعریف شده نمیتواند مقدار برگشتی داشته باشد و خطا میدهد
     // return data
@@ -86,7 +86,7 @@ function opd(option: object | string): object | string[] {
     return Object.getOwnPropertyNames(option)
 }
 
-console.log(opd({kj: true}));
+console.log(opd({ kj: true }));
 
 
 //چک نوع وردی تابع
@@ -112,12 +112,12 @@ let todo: { subject: string, status: (string | number), visible: boolean } = {
 
 console.log(typeof todo);
 
-//anonymos types in function
+//anonymous types in function
 function rectangle(point: { x: number, y: number }): number {
     return point.x * point.y
 }
 
-console.log(rectangle({x: 2, y: 3}));
+console.log(rectangle({ x: 2, y: 3 }));
 
 // معمولا از این anonymous type ها استفاده نیمکنیم و از جایگزین ان ها یعنی interface استفاده میکنیم
 
@@ -130,11 +130,11 @@ function signin(user: { email: string, password: string }): { email: string, pas
     }
 }
 
-console.log(signin({email: 'hhh@yahoo.com', password: '1111'}));
-console.log(signin({email: 'hhhe@yahoo.com', password: '1111'}));
+console.log(signin({ email: 'hhh@yahoo.com', password: '1111' }));
+console.log(signin({ email: 'hhhe@yahoo.com', password: '1111' }));
 
 
-//optional proprties
+//optional properties
 
 //در اینجا میتوانیم family را وارد کنیم یا نکنیم
 //اختیاری است
@@ -235,8 +235,8 @@ console.log(dur);
 console.log(frm);
 
 //اینو خودم از جاوا اسکریپت نوشتم
-let gh = {lat: '11111111111', lng: '2222222222'}
-let {lng, lat} = gh
+let gh = { lat: '11111111111', lng: '2222222222' }
+let { lng, lat } = gh
 console.log(lat, ' - ', lng);
 
 
@@ -280,7 +280,7 @@ const enum Post {
 console.log(State.Done);
 
 //نحوه جدید پارامترهای فانکشن
-function newTask({subject, state, post}: { subject: string, state: State, direction: Direction , post : Post}): { subject: string, state: State, post : Post } {
+function newTask({ subject, state, post }: { subject: string, state: State, direction: Direction, post: Post }): { subject: string, state: State, post: Post } {
     return {
         subject,
         state,
@@ -292,5 +292,219 @@ console.log(newTask({
     subject: 'dasd',
     state: State.Start,
     direction: Direction.down,
-    post : Post.Published
+    post: Post.Published
 }))
+
+
+//expression conditional
+
+let yok: string = 4 > 3 ? '000' : '111'
+let yhr: string = 3 > 3 ? '333' : 4 > 4 ? '2232' : '1254'
+let erge: string = (3 > 3 && 6 > 4) ? '333' : (4 > 4 || 4 > 5) ? '2232' : '1254'
+
+//خودم نوشتم
+function fun1({ min, max }: { min: number, max: number }): any {
+    return min
+}
+
+function fun2(minMax: { min: number, max: number }): any {
+    return minMax.min
+}
+
+console.log(fun1({ min: 2, max: 4 }))
+console.log(fun2({ min: 3, max: 3 }))
+
+//Interfaces
+//در اینتر فیس فقط میتوان تعریف کرد نمیشود مقدار دهس کرد
+interface IPerson {
+    name: string
+    age: number
+    email: string
+    password: string
+}
+
+//نوع این متغیر از جنس یک interface هست
+let myPerson: IPerson
+myPerson = {
+    name: 'sad',
+    age: 2,
+    email: 'asd',
+    password: 'ddsd',
+}
+
+console.log(typeof myPerson, myPerson)
+
+interface IPost {
+    subject: string
+    published: boolean
+    description: string
+    dateCreated?: Date
+    view: number | string
+
+    onPublished(): string
+}
+
+function nPost(post: IPost): IPost {
+    return { ...post }
+    //or
+    //return post
+}
+
+console.log(nPost(
+    {
+        subject: 'string',
+        published: false,
+        description: 'string',
+        view: 2,
+        onPublished() {
+            return 'on published'
+        }
+    }
+))
+
+
+//nullish coalescing(تعیین مقدار پیش فرض)
+let apiData = false
+//با گذاشتن || مقدار پیش فرض به متغیر به جای null یا undefined یا '' یا false یا 0 قرار داده میشود
+let getApiData = apiData || 'default value 1'
+//با گذاشتن ?? مقدار پیش فرض به متغیر به جای null یا undefined قرار داده میشود
+let getApiData2 = apiData ?? 'default value 2'
+console.log(getApiData)
+console.log(getApiData2)
+
+
+//optional chaining
+//چک که آیا یک پراپرتی درون یک آبجکت وجود دارد یا نه
+
+let yy: any = {
+    name: 'asad',
+    details: {
+        fName: 'asda',
+        security: {
+            email: 'sdasd',
+            password: 'sadasd'
+        }
+    }
+}
+//چک اینکه مثلا پراپرتی fName وجود دارد یا نه
+console.log(yy.details?.fName)
+
+//Type Aliases
+// این امکان را میدهد که جلوگیری کنیم از تکرار union type  و object type
+//تایپ به شکل مستعار
+//union type
+type mID = string | number | null | undefined | boolean
+
+function getMID(id: mID): mID {
+    return id
+}
+
+console.log(getMID(231))
+console.log(getMID('rew'))
+
+//object type
+//چون معمولا object type طولانی هستند میتوان از interface استفاده کنیم که البته میتوانیم از alias type هم استفاده کنیم
+type myPerson = {
+    fullName: [firstName: string, lastName: string]
+    details: {
+        fName: string
+        account: {
+            bank: string
+            number: number
+            security: {
+                pass: string
+            }
+        }
+    }
+}
+
+function guser(user: myPerson): myPerson {
+    return user
+}
+
+console.log(guser({
+    fullName: ['ha', 'sad'],
+    details: {
+        fName: 'sadasd',
+        account: {
+            bank: 'sad',
+            number: 312,
+            security: {
+                pass: 'asda'
+            }
+        }
+    }
+}))
+
+
+//literal types
+//در اصل تایپ نیستند بلکه مقدار هستند و تایپ یک متغیر را مقدار در نظر میگیریم
+//هر چیزی غیر از مقادیری که به عنوان تایپ در نظر گرفتیم به عنوان مقدار متغیر بنویسیم خطا میگیرد
+//مثلا تگ سلکت استفاده میشود
+//string literal type
+let yu: 'ks' | 'asd' | 'dsad' | '1' = 'asd'
+
+console.log(typeof yu, yu)
+
+//number literal type
+let sss: 1 | 2 | 3
+sss = 3
+
+//boolean literal type
+//boolean literal typeخیلی کاربردی ندارد از همون boolean استفاده میکنیم
+let isAc: true | false
+
+
+//استفاده از type alias در literal type
+
+type kkk = 'e' | 'w' | 'q' | 'h'
+
+let stwe: kkk
+let ref: kkk
+
+ref = 'q'
+
+//برای number literal بهتر است از enum استفاده کنیم که مفهومی تر شود چون در اونجا مقادیر دارای کلید هستند
+
+
+//ReadOnly Field
+
+interface Iuu {
+    name: string
+    readonly age: number
+}
+
+function getIuu(person: Iuu): Iuu {
+    return {
+        ...person
+    }
+}
+
+let erg = getIuu({ name: 'asd', age: 2 })
+
+erg.name = 'hhhhh'
+// erg.age = 2
+console.log(erg);
+
+//برای فقط خواندی کردن آبجکت ها و آرایه ها روش فرق میکند
+
+const oekwf = {
+    name: 'sad',
+    family: 'asd'
+} as const
+// oekwf.name = 'asd'
+
+let mnm = ['asd', 'sad', 'asd'] as const
+//or 
+let jkm: readonly number[] = [1, 2, 3]
+// mnm[0] = 'as'
+// jkm[2] = 2
+
+
+function funbbb({ name, family }: { name: string, family: string, age: number }): any {
+    return age
+}
+
+console.log(funbbb({ name: 'sd', family: 'sad', age: 3 }));
+console.log('fffffffff');
+
