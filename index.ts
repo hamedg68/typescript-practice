@@ -50,7 +50,7 @@ function setOption(options: object): string[] { //اینجا خروجی باید
     return ownProprties
 }
 
-console.log(setOption({ asd: 's', gr: 2, isActive: true }));
+console.log(setOption({asd: 's', gr: 2, isActive: true}));
 
 function printer(data: string): void {//چون نوع تابع به صورت void تعریف شده نمیتواند مقدار برگشتی داشته باشد و خطا میدهد
     // return data
@@ -86,7 +86,7 @@ function opd(option: object | string): object | string[] {
     return Object.getOwnPropertyNames(option)
 }
 
-console.log(opd({ kj: true }));
+console.log(opd({kj: true}));
 
 
 //چک نوع وردی تابع
@@ -117,7 +117,7 @@ function rectangle(point: { x: number, y: number }): number {
     return point.x * point.y
 }
 
-console.log(rectangle({ x: 2, y: 3 }));
+console.log(rectangle({x: 2, y: 3}));
 
 // معمولا از این anonymous type ها استفاده نیمکنیم و از جایگزین ان ها یعنی interface استفاده میکنیم
 
@@ -130,8 +130,8 @@ function signin(user: { email: string, password: string }): { email: string, pas
     }
 }
 
-console.log(signin({ email: 'hhh@yahoo.com', password: '1111' }));
-console.log(signin({ email: 'hhhe@yahoo.com', password: '1111' }));
+console.log(signin({email: 'hhh@yahoo.com', password: '1111'}));
+console.log(signin({email: 'hhhe@yahoo.com', password: '1111'}));
 
 
 //optional properties
@@ -235,8 +235,8 @@ console.log(dur);
 console.log(frm);
 
 //اینو خودم از جاوا اسکریپت نوشتم
-let gh = { lat: '11111111111', lng: '2222222222' }
-let { lng, lat } = gh
+let gh = {lat: '11111111111', lng: '2222222222'}
+let {lng, lat} = gh
 console.log(lat, ' - ', lng);
 
 
@@ -280,7 +280,7 @@ const enum Post {
 console.log(State.Done);
 
 //نحوه جدید پارامترهای فانکشن
-function newTask({ subject, state, post }: { subject: string, state: State, direction: Direction, post: Post }): { subject: string, state: State, post: Post } {
+function newTask({subject, state, post}: { subject: string, state: State, direction: Direction, post: Post }): { subject: string, state: State, post: Post } {
     return {
         subject,
         state,
@@ -303,7 +303,7 @@ let yhr: string = 3 > 3 ? '333' : 4 > 4 ? '2232' : '1254'
 let erge: string = (3 > 3 && 6 > 4) ? '333' : (4 > 4 || 4 > 5) ? '2232' : '1254'
 
 //خودم نوشتم
-function fun1({ min, max }: { min: number, max: number }): any {
+function fun1({min, max}: { min: number, max: number }): any {
     return min
 }
 
@@ -311,8 +311,8 @@ function fun2(minMax: { min: number, max: number }): any {
     return minMax.min
 }
 
-console.log(fun1({ min: 2, max: 4 }))
-console.log(fun2({ min: 3, max: 3 }))
+console.log(fun1({min: 2, max: 4}))
+console.log(fun2({min: 3, max: 3}))
 
 //Interfaces
 //در اینتر فیس فقط میتوان تعریف کرد نمیشود مقدار دهس کرد
@@ -345,7 +345,7 @@ interface IPost {
 }
 
 function nPost(post: IPost): IPost {
-    return { ...post }
+    return {...post}
     //or
     //return post
 }
@@ -480,7 +480,7 @@ function getIuu(person: Iuu): Iuu {
     }
 }
 
-let erg = getIuu({ name: 'asd', age: 2 })
+let erg = getIuu({name: 'asd', age: 2})
 
 erg.name = 'hhhhh'
 // erg.age = 2
@@ -501,10 +501,218 @@ let jkm: readonly number[] = [1, 2, 3]
 // jkm[2] = 2
 
 
-function funbbb({ name, family }: { name: string, family: string, age: number }): any {
-    return age
+//function overloading
+
+
+//OOP(classes)
+//کلاس ها مدل سازی میکنن یک شی را بر اساس اطلاعات مورد نیاز
+//در کلاس ها رفتار ها متدها و ویژگی ها پراپرتی ها است
+class uPerson {
+
+    firstName: string
+    lastName: string
+    age: number
+
+    constructor(firstName: string, lastName: string, age: number) {
+        this.firstName = firstName
+        this.lastName = lastName
+        this.age = age
+    }
+
+    getFullName(): string {
+        return `full name : ${this.firstName + ' ' + this.lastName}`
+    }
 }
 
-console.log(funbbb({ name: 'sd', family: 'sad', age: 3 }));
-console.log('fffffffff');
+let oreo = new uPerson('jack', 'wilson', 44)
+
+console.log(oreo.age)
+console.log(oreo.getFullName())
+
+//OOP(interfaces)
+// اینترفیس ها ساختار یک شی را تعیین میکنند که تعیین  میکنند متغیر ما حتما باید همچین پراپرتی هایی رو داشته باشه
+//میتوانیم برای کلاس توسط interfaceها یک سری قوانین رو تعریف کنیم
+
+type usr = {//type alias
+    ID: number
+    name: string
+    email: string
+    date: Date
+    gender: 'male' | 'female' //literal type
+}
+
+interface Iusr {
+    _users: usr[]
+
+    create(date: usr): void
+
+    update(id: number, newData: any): void
+
+    delete(id: number): void
+
+    getAll(): usr[]
+
+    getOne(id: number): usr
+}
+
+//نحوه پیروی کردن یک کلاس از یک اینترفیس
+class userModel implements Iusr {
+    _users: usr[]; // repository
+
+    constructor() {
+        this._users = []
+    }
+
+    create(data: usr): void {
+        this._users.push(data)
+    }
+
+    delete(id: number): void {
+        this._users.forEach((item, index) => {
+            if (item.ID === id) {
+                this._users.splice(index, 1)
+            }
+        })
+    }
+
+    getAll(): usr[] {
+        return this._users;
+    }
+
+    getOne(id: number): usr {
+        let one = this._users.filter(item => item.ID === id);
+        return one[0]
+    }
+
+    update(id: number, newData: any): void {
+        this._users.forEach((item, index) => {
+            if (item.ID == id) {
+                this._users[index] = Object.assign(item, {...newData})
+            }
+        })
+    }
+}
+
+let newUsr = new userModel()
+
+newUsr.create({ID: 1, name: 'gimi jones', email: 'gmimsd@gmail.com', date: new Date(), gender: 'male'})
+newUsr.create({ID: 2, name: 'judy stones', email: 'judyt@gmail.com', date: new Date(), gender: 'female'})
+newUsr.create({ID: 3, name: 'bill jonson', email: 'billj@gmail.com', date: new Date(), gender: 'male'})
+
+
+newUsr.delete(3)
+
+console.log(newUsr.getOne(2))
+
+newUsr.update(1, {name: 'greg'})
+
+console.log(newUsr.getAll())
+
+
+//inheritance
+//وراثت
+
+type permission = 'admin' | 'writer' | 'normal'
+type ussr = { id: number, name: string, role: permission }
+
+class role {
+    userModel: ussr
+
+    constructor(user: ussr) {
+        this.userModel = user
+    }
+
+    print(): ussr {
+        return this.userModel
+    }
+}
+
+class admin extends role {
+
+    constructor(id: number, name: string) {
+        super({id: id, name: name, role: 'admin'});
+    }
+}
+
+class writer extends role implements Iusr {
+    _users: usr[]
+
+    constructor(id: number, name: string) {
+        super({id: id, name: name, role: 'writer'});
+        this._users = []
+    }
+
+    create(date: usr): void {
+        throw new Error("Method not implemented.")
+    }
+
+    update(id: number, newData: any): void {
+        throw new Error("Method not implemented.")
+    }
+
+    delete(id: number): void {
+        throw new Error("Method not implemented.")
+    }
+
+    getAll(): usr[] {
+        throw new Error("Method not implemented.")
+    }
+
+    getOne(id: number): usr {
+        throw new Error("Method not implemented.")
+    }
+}
+
+let adminUsr = new admin(1, 'yasin')
+let writerUsr = new writer(2, 'ramin')
+
+console.log(adminUsr.print())
+console.log(writerUsr.print())
+
+
+//OOP(access modifier or member visibility)
+//این امکان را به ما میدهند تا برای پراپرتی ها و متدها یعنی (members) سطح دسترسی تعیین کنیم member visibility
+
+class mnPerson {
+    //حالت پیش فرض تمام member ها به صورت public هست چه بنویسیم چه ننویسیم به صورت public هست
+    public id: number
+    public name: string
+    public age: number
+    date: Date
+
+
+    private active: boolean //فقط در خود کلاس بهش دسترسی داریم
+    protected role: string //شبیه به private هست و همین طور فقط در کلاس های فرزند هم به این member دسترسی داریم
+
+
+    constructor() {
+        this.id = 0
+        this.name = ''
+        this.age = 0
+        this.date = new Date()
+        this.active = false
+        this.role = ''
+    }
+
+
+    public members() {
+        return {id: this.id, name: this.name, age: this.age, date: this.date}
+    }
+}
+
+let ppPerson = new mnPerson()
+// console.log(ppPerson.active) //private member
+// console.log(ppPerson.role) // protected member
+console.log(ppPerson.members())
+
+class mChild extends mnPerson {
+    constructor() {
+        super();
+    }
+
+    getMember() {
+        //return this.active //private member
+        return this.role //protected member
+    }
+}
 
