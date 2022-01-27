@@ -716,3 +716,68 @@ class mChild extends mnPerson {
     }
 }
 
+//abstract class
+//این کلاس ها قابلیت نمونه سازی (ساختن نمونه جدید) ندارند و صرفا میشود فقط از آن ها ارث بری کرد
+//همچنین میتوانند مثل کلاس های عادی implement کنند
+enum mnState {
+    start, done, waiting, failed
+}
+
+type todo = {
+    subject: string
+    state: mnState
+}
+
+interface IITodo {
+    subject: string
+    state: mnState
+}
+
+interface IITodoOperation {
+    newTodo(todo: IITodo): todo
+
+    deleteTodo(subject: string): void
+}
+
+abstract class mnxRepo implements IITodoOperation {
+    todos: todo[] //class repository
+    //or
+    // todos: IITodo[] //class repository
+
+    constructor() {
+        this.todos = []
+    }
+
+    deleteTodo(subject: string): void {
+    }
+
+    newTodo(todo: IITodo): todo {
+        return todo;
+    }
+
+
+}
+
+class mnxTodoManger extends mnxRepo {
+    constructor() {
+        super();
+    }
+
+    newToDo(todo: todo) {
+        this.todos.push(todo)
+    }
+
+    getTodos(): todo[] {
+        return this.todos
+    }
+
+    deleteTodo(subject: string) {
+        super.deleteTodo(subject);
+    }
+}
+
+let todoMNModel = new mnxTodoManger()
+todoMNModel.newToDo({subject: 'sadas', state: mnState.done})
+todoMNModel.newToDo({subject: 'ttttt', state: mnState.start})
+console.log(todoMNModel.getTodos())
+
