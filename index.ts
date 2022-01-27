@@ -719,6 +719,7 @@ class mChild extends mnPerson {
 //abstract class
 //این کلاس ها قابلیت نمونه سازی (ساختن نمونه جدید) ندارند و صرفا میشود فقط از آن ها ارث بری کرد
 //همچنین میتوانند مثل کلاس های عادی implement کنند
+//یک کلاس abstract کلاسی است که شامل حداقل یک متد abstract باشد. متدهای abstract متدهایی هستند که فاقد پیاده سازی هستند و فقط کلاس‌های فرزند را وادار می‌کنند آن متدها را در خود پیاده سازی کنند.
 enum mnState {
     start, done, waiting, failed
 }
@@ -740,15 +741,17 @@ interface IITodoOperation {
 }
 
 abstract class mnxRepo implements IITodoOperation {
-    todos: todo[] //class repository
+   protected todos: todo[] //class repository
     //or
     // todos: IITodo[] //class repository
 
-    constructor() {
+    protected constructor() {
         this.todos = []
     }
 
-    deleteTodo(subject: string): void {
+   protected abstract make() : void
+
+     deleteTodo(subject: string): void {
     }
 
     newTodo(todo: IITodo): todo {
@@ -759,6 +762,9 @@ abstract class mnxRepo implements IITodoOperation {
 }
 
 class mnxTodoManger extends mnxRepo {
+    make() {
+        throw new Error("Method not implemented.")
+    }
     constructor() {
         super();
     }
