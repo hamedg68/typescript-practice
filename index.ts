@@ -50,7 +50,7 @@ function setOption(options: object): string[] { //اینجا خروجی باید
     return ownProprties
 }
 
-console.log(setOption({ asd: 's', gr: 2, isActive: true }));
+console.log(setOption({asd: 's', gr: 2, isActive: true}));
 
 function printer(data: string): void {//چون نوع تابع به صورت void تعریف شده نمیتواند مقدار برگشتی داشته باشد و خطا میدهد
     // return data
@@ -86,7 +86,7 @@ function opd(option: object | string): object | string[] {
     return Object.getOwnPropertyNames(option)
 }
 
-console.log(opd({ kj: true }));
+console.log(opd({kj: true}));
 
 
 //چک نوع وردی تابع
@@ -117,7 +117,7 @@ function rectangle(point: { x: number, y: number }): number {
     return point.x * point.y
 }
 
-console.log(rectangle({ x: 2, y: 3 }));
+console.log(rectangle({x: 2, y: 3}));
 
 // معمولا از این anonymous type ها استفاده نیمکنیم و از جایگزین ان ها یعنی interface استفاده میکنیم
 
@@ -130,8 +130,8 @@ function signin(user: { email: string, password: string }): { email: string, pas
     }
 }
 
-console.log(signin({ email: 'hhh@yahoo.com', password: '1111' }));
-console.log(signin({ email: 'hhhe@yahoo.com', password: '1111' }));
+console.log(signin({email: 'hhh@yahoo.com', password: '1111'}));
+console.log(signin({email: 'hhhe@yahoo.com', password: '1111'}));
 
 
 //optional properties
@@ -235,8 +235,8 @@ console.log(dur);
 console.log(frm);
 
 //اینو خودم از جاوا اسکریپت نوشتم
-let gh = { lat: '11111111111', lng: '2222222222' }
-let { lng, lat } = gh
+let gh = {lat: '11111111111', lng: '2222222222'}
+let {lng, lat} = gh
 console.log(lat, ' - ', lng);
 
 
@@ -280,7 +280,7 @@ const enum Post {
 console.log(State.Done);
 
 //نحوه جدید پارامترهای فانکشن
-function newTask({ subject, state, post }: { subject: string, state: State, direction: Direction, post: Post }): { subject: string, state: State, post: Post } {
+function newTask({subject, state, post}: { subject: string, state: State, direction: Direction, post: Post }): { subject: string, state: State, post: Post } {
     return {
         subject,
         state,
@@ -303,7 +303,7 @@ let yhr: string = 3 > 3 ? '333' : 4 > 4 ? '2232' : '1254'
 let erge: string = (3 > 3 && 6 > 4) ? '333' : (4 > 4 || 4 > 5) ? '2232' : '1254'
 
 //خودم نوشتم
-function fun1({ min, max }: { min: number, max: number }): any {
+function fun1({min, max}: { min: number, max: number }): any {
     return min
 }
 
@@ -311,8 +311,8 @@ function fun2(minMax: { min: number, max: number }): any {
     return minMax.min
 }
 
-console.log(fun1({ min: 2, max: 4 }))
-console.log(fun2({ min: 3, max: 3 }))
+console.log(fun1({min: 2, max: 4}))
+console.log(fun2({min: 3, max: 3}))
 
 //Interfaces
 //در اینتر فیس فقط میتوان تعریف کرد نمیشود مقدار دهس کرد
@@ -345,7 +345,7 @@ interface IPost {
 }
 
 function nPost(post: IPost): IPost {
-    return { ...post }
+    return {...post}
     //or
     //return post
 }
@@ -480,7 +480,7 @@ function getIuu(person: Iuu): Iuu {
     }
 }
 
-let erg = getIuu({ name: 'asd', age: 2 })
+let erg = getIuu({name: 'asd', age: 2})
 
 erg.name = 'hhhhh'
 // erg.age = 2
@@ -495,7 +495,7 @@ const oekwf = {
 // oekwf.name = 'asd'
 
 let mnm = ['asd', 'sad', 'asd'] as const
-//or 
+//or
 let jkm: readonly number[] = [1, 2, 3]
 // mnm[0] = 'as'
 // jkm[2] = 2
@@ -587,7 +587,7 @@ class userModel implements Iusr {
     update(id: number, newData: any): void {
         this._users.forEach((item, index) => {
             if (item.ID == id) {
-                this._users[index] = Object.assign(item, { ...newData })
+                this._users[index] = Object.assign(item, {...newData})
             }
         })
     }
@@ -595,16 +595,16 @@ class userModel implements Iusr {
 
 let newUsr = new userModel()
 
-newUsr.create({ ID: 1, name: 'gimi jones', email: 'gmimsd@gmail.com', date: new Date(), gender: 'male' })
-newUsr.create({ ID: 2, name: 'judy stones', email: 'judyt@gmail.com', date: new Date(), gender: 'female' })
-newUsr.create({ ID: 3, name: 'bill jonson', email: 'billj@gmail.com', date: new Date(), gender: 'male' })
+newUsr.create({ID: 1, name: 'gimi jones', email: 'gmimsd@gmail.com', date: new Date(), gender: 'male'})
+newUsr.create({ID: 2, name: 'judy stones', email: 'judyt@gmail.com', date: new Date(), gender: 'female'})
+newUsr.create({ID: 3, name: 'bill jonson', email: 'billj@gmail.com', date: new Date(), gender: 'male'})
 
 
 newUsr.delete(3)
 
 console.log(newUsr.getOne(2))
 
-newUsr.update(1, { name: 'greg' })
+newUsr.update(1, {name: 'greg'})
 
 console.log(newUsr.getAll())
 
@@ -630,7 +630,7 @@ class role {
 class admin extends role {
 
     constructor(id: number, name: string) {
-        super({ id: id, name: name, role: 'admin' });
+        super({id: id, name: name, role: 'admin'});
     }
 }
 
@@ -638,7 +638,7 @@ class writer extends role implements Iusr {
     _users: usr[]
 
     constructor(id: number, name: string) {
-        super({ id: id, name: name, role: 'writer' });
+        super({id: id, name: name, role: 'writer'});
         this._users = []
     }
 
@@ -696,7 +696,7 @@ class mnPerson {
 
 
     public members() {
-        return { id: this.id, name: this.name, age: this.age, date: this.date }
+        return {id: this.id, name: this.name, age: this.age, date: this.date}
     }
 }
 
@@ -765,6 +765,7 @@ class mnxTodoManger extends mnxRepo {
     make() {
         throw new Error("Method not implemented.")
     }
+
     constructor() {
         super();
     }
@@ -783,8 +784,8 @@ class mnxTodoManger extends mnxRepo {
 }
 
 let todoMNModel = new mnxTodoManger()
-todoMNModel.newToDo({ subject: 'sadas', state: mnState.done })
-todoMNModel.newToDo({ subject: 'ttttt', state: mnState.start })
+todoMNModel.newToDo({subject: 'sadas', state: mnState.done})
+todoMNModel.newToDo({subject: 'ttttt', state: mnState.start})
 console.log(todoMNModel.getTodos())
 
 
@@ -824,7 +825,7 @@ abstract class mnxxRepo implements IITodoOperation {
 class mnxxxTodoManger extends mnxxRepo {
 
     private static uid: string = ''
-    public static memb : string = 'body this a static member'
+    public static memb: string = 'body this a static member'
 
     constructor() {
         super();
@@ -839,13 +840,12 @@ class mnxxxTodoManger extends mnxxRepo {
     }
 
 
-
     protected make(): void {
         throw new Error("Method not implemented.")
     }
 
     newToDo(todo: todoII) {
-        this.todos.push({ uid: mnxxxTodoManger.uid, ...todo })
+        this.todos.push({uid: mnxxxTodoManger.uid, ...todo})
         mnxxxTodoManger.nextID()
     }
 
@@ -866,7 +866,34 @@ console.log(mnxxxTodoManger.memb);
 
 let todoMNXModel = new mnxxxTodoManger()
 
-todoMNXModel.newToDo({ subject: 'ttttttttt', state: mnState.done })
-todoMNXModel.newToDo({ subject: 'yyyyyy', state: mnState.failed })
+todoMNXModel.newToDo({subject: 'ttttttttt', state: mnState.done})
+todoMNXModel.newToDo({subject: 'yyyyyy', state: mnState.failed})
 
 console.log(todoMNXModel.getTodos());
+
+
+//OOP(setter & getter)
+
+class GMClass {
+
+    private name: string = 'sad'
+
+    constructor() {
+        this.name = 'johnatan'
+    }
+
+    set setName(val : string) {
+        this.name = val
+    }
+
+    get getName() {
+        return this.name
+    }
+
+}
+
+let gmcClass = new GMClass()
+
+console.log(gmcClass.getName)
+gmcClass.setName = 'david'
+console.log(gmcClass.getName)
