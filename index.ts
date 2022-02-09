@@ -915,3 +915,27 @@ let gmcClass = new GMClass();
 console.log(gmcClass.getName);
 gmcClass.setName = "david";
 console.log(gmcClass.getName);
+
+//OOP(read only member)
+class YHSClass {
+  readonly name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  // set setName(val: string) {
+  //   this.name = val;
+  // }
+
+  get getName() {
+    return this.name;
+  }
+}
+
+let yhsClass = new YHSClass("zero in one");
+
+// yhsClass.name = 'as'
+
+console.log(yhsClass.name);
+console.log(yhsClass.getName);
