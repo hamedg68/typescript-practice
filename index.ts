@@ -13,7 +13,7 @@ if (typeof age !== "number") {
 }
 
 //type inference
-// در تایپ اسکریپت از type inference استفاده میکند (تشخیص اتوماتیک نوع داده)...نوع داده را نگذاریم خودش بر اساس مقداری که دادیم نوعش را تعیین میکند و بعدا امکان تغییر نوع داده وجود ندارد
+// استفاده میکند (تشخیص اتوماتیک نوع داده)...نوع داده را نگذاریم خودش بر اساس مقداری که دادیم نوعش را تعیین میکند و بعدا امکان تغییر نوع داده وجود ندارد type inference از typescript در
 // در جاوااسکریپت این قضیه صدق نمیکند و در هر لحظه میشود با مقدار دادن به متغیر نوع داده را عوض کنیم
 let ytyt = "fff";
 
@@ -21,7 +21,7 @@ ytyt = "dsf";
 // ytyt = 4
 
 let myF;
-//چون myF نوعش مشخص نیست ما هر بار که مقدار دهی میکنیم میتواند نوع متغیر با توجه به مقداری که ما میدهیم تغییر کند
+// است .ما هر بار که مقدار دهی میکنیم میتواند نوع متغیر با توجه به مقداری که ما میدهیم تغییر کند any وعش مشخص نیست در واقع نوعش myf چون
 myF = "rgr";
 myF = 3;
 myF = true;
@@ -36,10 +36,14 @@ let options = {
 
 console.log(typeof options);
 
-// function getFullName( f:string , a:string) : string{
+/*functions*/
+
+//regular
+// function getFullName(f: string , a: string): string {
 //     return f +' - '+ a
 // }
 
+//arrow function
 const getFullName = (f: number, a: string): string => {
   return f + " - " + a;
 };
@@ -56,10 +60,12 @@ function setOption(options: object): string[] {
   return ownProprties;
 }
 
+// هست که بعدا آشنا میشویم generic که Array<string> میتوان نوشت string[] به جای نوشتن خروجی تابع به صورت
+
 console.log(setOption({ asd: "s", gr: 2, isActive: true }));
 
 function printer(data: string): void {
-  //چون نوع تابع به صورت void تعریف شده نمیتواند مقدار برگشتی داشته باشد و خطا میدهد
+  // تعریف شده نمیتواند مقدار برگشتی داشته باشد و خطا میده void چون نوع تابع به صورت
   // return data
   console.log(`data is : ${data}`);
 }
@@ -68,7 +74,9 @@ printer("hellow sa");
 
 //توابعی داریم خودش یک تابع دیگر را برمیگرداند
 function callback(fun: Function): Function {
+  //تابع مستقیما اجرا میشود اگر از پرانتز باز و بسته جلو اون استفاده کنیم اگر نباشد رفرنس اون تابع میاد
   return fun();
+  // return fun;
 }
 
 console.log(
@@ -85,11 +93,14 @@ function generateUniqID() {
 
 console.log(generateUniqID());
 
-//union types
-//این متغییر میتواند فقط استرینگ یا بولین بگیرد هرچی دیگه بگیرد خطا میدهد
-let mngrg: string | boolean = "2";
+/*union types*/
 
-function opd(option: object | string): object | string[] {
+// در نظر بگیریم type میتوانیم به یک داده یک یا چند union type در
+let mngrg: string | boolean;
+//این متغییر میتواند فقط استرینگ یا بولین بگیرد هرچی دیگه بگیرد خطا میدهد
+mngrg = "2";
+
+function opd(option: object | string[]): object | string[] {
   return Object.getOwnPropertyNames(option);
 }
 
@@ -100,14 +111,16 @@ function getAge(age: string | number): number | string {
   if (typeof age === "string") {
     return `string age is : ${age}`;
   } else {
-    return `number age is : ${age}`;
+    return age;
   }
 }
 
 console.log(getAge("44"));
 console.log(getAge(23));
 
-//anonymous types
+/*anonymous types*/
+
+// به تایپ هایی گفته میشود که به شکل یک آبجکت تعریف میشوند و میتوانیم برای پراپرتی های این آبجکت تایپ تعیین کنیم
 //در اینجا متغیری تعریف کردیم که فقط میتواند پراپرتی های تعریف شده داخل پرانتز با نوع مشخص شده را دریافت کند
 //اگر پراپرتی اضافه بنویسیم خطا میگیرد
 let todo: { subject: string; status: string | number; visible: boolean } = {
@@ -116,7 +129,7 @@ let todo: { subject: string; status: string | number; visible: boolean } = {
   visible: false,
 };
 
-console.log(typeof todo);
+console.log("ANONTMOUS TYPE ", typeof todo);
 
 //anonymous types in function
 function rectangle(point: { x: number; y: number }): number {
@@ -124,8 +137,7 @@ function rectangle(point: { x: number; y: number }): number {
 }
 
 console.log(rectangle({ x: 2, y: 3 }));
-
-// معمولا از این anonymous type ها استفاده نیمکنیم و از جایگزین ان ها یعنی interface استفاده میکنیم
+// ها استفاده میکنیمinterface استفاده نمیکنیم و از جایگزین آن یعنی anonymous type معمولا از
 
 function signin(user: {
   email: string;
@@ -141,17 +153,18 @@ function signin(user: {
 console.log(signin({ email: "hhh@yahoo.com", password: "1111" }));
 console.log(signin({ email: "hhhe@yahoo.com", password: "1111" }));
 
-//optional properties
+/*optional properties and optional parameters*/
 
-//در اینجا میتوانیم family را وارد کنیم یا نکنیم
-//اختیاری است
+//optional properties
+// را وارد کنیم یا نکنیم family در اینجا میتوانیم
+// اختیاری است
 let mUser: { name: string; family?: string } = {
   name: "soadj",
   // family : 'asd'
 };
 
-//optional properties and optional parameters
-//isActive is optional parameters
+//optional parameters
+//isActive is an optional parameters
 function hUser(
   user: { name: string; age?: string },
   isActive?: boolean | string
@@ -161,12 +174,14 @@ function hUser(
 
 console.log(hUser(mUser));
 
-//undefined and null types
-//نال مقدار دهی میشود ولی undefined پیش فرض است
+/*undefined and null types*/
+
+// پیش فرض است undefined مقدار دهی مشود ولی null
 let aaa = null;
 let bbb;
 
-console.log("aaa : " + aaa, "bbb : " + bbb);
+console.log("aaa : " + aaa, typeof aaa);
+console.log("aaa : " + bbb, typeof bbb);
 
 //union types
 let uInfo: object | null | undefined;
@@ -177,9 +192,11 @@ if (uInfo !== null && uInfo !== undefined) {
   console.log("object does not have proprty");
 }
 
-//any type
+/*never, any and unknown types*/
 
-//  در این حالت هر مقداری خواستیم میتونیم وارد کنیم بدون خطا در واقع در جاوااسکریپت همه متغیرها حالت any دارد
+//any type
+// قرار دارند و میتوانیم هر مقداری خواستیم بدیم any در جاوااسکریپت همه متغییرها در حالت
+// در اینجا هم میتوانیم هر مقداری خواستیم بدیم
 let egd: any = 21;
 
 egd = true;
@@ -188,6 +205,16 @@ egd = 312;
 
 //unknown type
 //تفاوت و شباهت unknown و any
+
+let wee: any = 111;
+let wee2: string = "asd";
+wee2 = wee;
+
+let sfr: unknown = 22;
+let sfr2: string = "22";
+//sfr2 = sfr
+
+// است any بهتر از unknown از لحاظ امنیتی تایپ
 
 //never type
 //در این حالت قرار نیست هیچ مقداری برگردد و قرار است خطایی تولید شود
@@ -202,7 +229,8 @@ function infinitLoop(): never {
 
 //تفاوت never و void
 
-//assertion types (explicit casting)
+/*assertion types (explicit casting)*/
+
 //تبدیل دیتا تایپ متغیرها به هم دیگر
 
 let mg: any = "22";
@@ -215,7 +243,7 @@ let castVar2 = mg as boolean;
 console.log("type assertions ==> ", typeof castVar, castVar);
 console.log("type assertions ==> ", typeof castVar2, castVar2);
 
-//tuple types
+/*tuple types*/
 //در اصل آرایه هایی هستند با مقدارهای مشخص و تایپ های مشخص
 let tuple: [x: number, y: number] = [10, 14];
 
@@ -238,9 +266,9 @@ stateVideo = [3, "s", "asd"];
 stateVideo = [43, "gt"];
 
 //tuple destructuring
-let [dur, frm] = stateVideo;
-console.log(dur);
-console.log(frm);
+let [Duration, Format] = stateVideo;
+console.log(Duration);
+console.log(Format);
 
 //اینو خودم از جاوا اسکریپت نوشتم
 let gh = { lat: "11111111111", lng: "2222222222" };
@@ -255,11 +283,10 @@ ddd = [2, "s", "w", "g", "1", "2"];
 ddd = [2];
 
 let khg: [string, string, string] = ["2", "1", "4"];
-
-//در این حالت خاص khg باید spread شود
+// شود spread باید khg در این حالت خاص
 ddd = [44, ...khg];
 
-//Enum types
+/*Enum types*/
 
 // در اینجا به طور پیش فرض خودش از 0 شروع به شماره گذاری میکند (موس روش بیاری میفهمی)
 //enum default
@@ -296,6 +323,7 @@ const enum Post {
 console.log(State.Done);
 
 //نحوه جدید پارامترهای فانکشن
+//ابتدا پراپرتی ها سپس در پرانتز بعدی نوع پراپرتی ها. صرفا سه تا از چهار پارامتر ورودی استخراج شده
 function newTask({
   subject,
   state,
@@ -318,7 +346,7 @@ console.log(
   })
 );
 
-//expression conditional
+/*expression conditional*/
 
 let yok: string = 4 > 3 ? "000" : "111";
 let yhr: string = 3 > 3 ? "333" : 4 > 4 ? "2232" : "1254";
