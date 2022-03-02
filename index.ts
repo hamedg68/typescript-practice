@@ -454,7 +454,7 @@ console.log("optional chaining ==> ", yy.details?.ff);
 // union type و object type این امکان را میدهد که جلوگیری کنیم از تکرار
 //یک بار تعریف میکنیم و به هر چند تا متغییر که خواستیم اختصاص میدهیم
 //تایپ به شکل مستعار
-//type alias with union type 
+//type alias with union type
 type mID = string | number | null | undefined | boolean;
 
 function getMID(id: mID): mID {
@@ -467,7 +467,7 @@ console.log(getMID("rew"));
 // object type
 // استفاده کنیم alias type یا interface معمولا طولانی هستند میتوانیم از object type چون
 
-type iiio = [firstName: string, lastName: string]
+type iiio = [firstName: string, lastName: string];
 type myPerson = {
   //tuple type
   fullName: iiio;
@@ -509,7 +509,7 @@ console.log(
 //هر چیزی غیر از مقادیری که به عنوان تایپ در نظر گرفتیم به عنوان مقدار متغیر بنویسیم خطا میگیرد
 //مثلا تگ سلکت استفاده میشود
 //union type in literal type, here is string literal type
-let yu: "ks" | "asd" | "dsad" | '12' = "asd";
+let yu: "ks" | "asd" | "dsad" | "12" = "asd";
 
 console.log(typeof yu, yu);
 
@@ -523,12 +523,12 @@ sss = 2;
 let isAc: true | false;
 
 // type alias در literal type استفاده از
-type kkk = "e" | "w" | "q" | "h" ;
+type kkk = "e" | "w" | "q" | "h";
 
-let stwe: kkk = 'e';
+let stwe: kkk = "e";
 let ref: kkk;
 
-ref ='q';
+ref = "q";
 
 /*ReadOnly Field*/
 interface Iuu {
@@ -566,7 +566,8 @@ let jkm: readonly number[] = [1, 2, 3];
 
 /*function overloading*/
 
-//OOP(classes)
+/*OOP(define classes)*/
+
 //کلاس ها مدل سازی میکنن یک شی را بر اساس اطلاعات مورد نیاز
 //در کلاس ها رفتار ها و متدها و ویژگی ها پراپرتی ها است
 class uPerson {
@@ -574,7 +575,9 @@ class uPerson {
   lastName: string;
   age: number;
 
+  //این تابع سازنده زمانی اجرا میشود که بخواهیم یک نمونه سازی جدید از این کلاس انجام بدیم
   constructor(firstName: string, lastName: string, age: number) {
+    // به کلاس اشاره میکند this کلمه کلیدی
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
@@ -590,12 +593,12 @@ let oreo = new uPerson("jack", "wilson", 44);
 console.log(oreo.age);
 console.log(oreo.getFullName());
 
-//OOP(interfaces)
+/*OOP(interfaces)*/
 // اینترفیس ها ساختار یک شی را تعیین میکنند و نشان میدهند متغیر ما حتما باید همچین پراپرتی هایی رو داشته باشه
-//میتوانیم برای کلاس توسط interfaceها یک سری قوانین رو تعریف کنیم
+// ها یک سری قوانین را تعیین کنیم interface میتوانم برای کلاس ها توسط
 
+//type alias
 type usr = {
-  //type alias
   ID: number;
   name: string;
   email: string;
@@ -687,12 +690,13 @@ newUsr.update(1, { name: "greg" });
 
 console.log(newUsr.getAll());
 
-//inheritance
+/*inheritance*/
 //وراثت
 
 type permission = "admin" | "writer" | "normal";
 type ussr = { id: number; name: string; role: permission };
 
+//parent class
 class role {
   userModel: ussr;
 
@@ -707,7 +711,8 @@ class role {
 
 class admin extends role {
   constructor(id: number, name: string) {
-    super({ id: id, name: name, role: "admin" });
+    // super({ id: id, name: name, role: "admin" });
+    super({ id, name, role: "admin" });
   }
 }
 
@@ -746,18 +751,19 @@ let writerUsr = new writer(2, "ramin");
 console.log(adminUsr.print());
 console.log(writerUsr.print());
 
-//OOP(access modifier or member visibility)
-//این امکان را به ما میدهند تا برای پراپرتی ها و متدها یعنی (members) سطح دسترسی تعیین کنیم member visibility
+/*OOP(access modifier or member visibility)*/
+// سطح دسترسی تعیین کنیم member این امکان را به ما میدهند تا برای پراپرتی ها و متدها یعنی member visibility
 
 class mnPerson {
-  //حالت پیش فرض تمام member ها به صورت public هست چه بنویسیم چه ننویسیم به صورت public هست
+  // هستند حالا چه بنویسیم چه ننویسیم و چه در داخل کلاس یا خارج اون به آن ها دسترسی داریم public ها به صورت member حالت پیش فرض تمام
+  //
   public id: number;
   public name: string;
   public age: number;
   date: Date;
 
-  private active: boolean; //فقط در خود کلاس بهش دسترسی داریم
-  protected role: string; //شبیه به private هست و همین طور فقط در کلاس های فرزند هم به این member دسترسی داریم
+  private active: boolean; // فقط در خود کلاس بهش دسترسی داریم حتی در کلاس های فرزند دسترسی نداریم
+  protected role: string; // هست با این تفاوت که فقط در خود کلاس و کلاس های فرزند به اون دسترسی داریم private شبیه به
 
   constructor() {
     this.id = 0;
@@ -774,6 +780,7 @@ class mnPerson {
 }
 
 let ppPerson = new mnPerson();
+console.log(ppPerson.name); //public member
 // console.log(ppPerson.active) //private member
 // console.log(ppPerson.role) // protected member
 console.log(ppPerson.members());
@@ -789,10 +796,11 @@ class mChild extends mnPerson {
   }
 }
 
-//abstract class
+/*abstract class*/
+
 //این کلاس ها قابلیت نمونه سازی (ساختن نمونه جدید) ندارند و صرفا میشود فقط از آن ها ارث بری کرد
-//همچنین میتوانند مثل کلاس های عادی implement کنند
-//یک کلاس abstract کلاسی است که شامل حداقل یک متد abstract باشد. متدهای abstract متدهایی هستند که فاقد پیاده سازی هستند و فقط کلاس‌های فرزند را وادار می‌کنند آن متدها را در خود پیاده سازی کنند.
+// کنند implement همچنین میتوانند مثل کلاس های عادی
+// متد هایی هستند که فاقد پیاده سازی هستند و فقط کلاس های فرزند را وادار میکنند که که آن متدهای را در خود پیاده سازی کنند abstract متدهای . باشد abstract کلاسی است که حداقل دارای یک متد abstract یک کلاس
 enum mnState {
   start,
   done,
@@ -861,7 +869,7 @@ todoMNModel.newToDo({ subject: "sadas", state: mnState.done });
 todoMNModel.newToDo({ subject: "ttttt", state: mnState.start });
 console.log(todoMNModel.getTodos());
 
-//OOP(static member)
+/*OOP(static member)*/  
 //به عضوهایی گفته می شود که بدون نیاز به نمونه سازی از کلاسی به آن ها دسترسی داریم
 //عضوهای استاتیک هم میتوانند متد باشند هم پراپرتی
 //بارز ترین نمونه برای این موضوع Math
