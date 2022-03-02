@@ -2,7 +2,7 @@ let user: string = "hamed";
 let age: number = 213;
 let isOnline: boolean = true;
 let myNum: 3;
-
+// یک متغیر دیگر برای متغیر جدید type استفاده از
 const p: typeof user = "3";
 
 console.log(`tpye of p : ${typeof p}`);
@@ -352,19 +352,28 @@ let yok: string = 4 > 3 ? "000" : "111";
 let yhr: string = 3 > 3 ? "333" : 4 > 4 ? "2232" : "1254";
 let erge: string = 3 > 3 && 6 > 4 ? "333" : 4 > 4 || 4 > 5 ? "2232" : "1254";
 
+//??????????
+// let ghhh : object ={
+//   p : 23
+// }
+
+// console.log(ghhh.p > 2);
+
 //خودم نوشتم
-function fun1({ min, max }: { min: number; max: number }): any {
-  return min;
+function fun1({ min, max }: { min: number; max: number }, age: number): any {
+  return age + min;
 }
 
 function fun2(minMax: { min: number; max: number }): any {
   return minMax.min;
 }
 
-console.log(fun1({ min: 2, max: 4 }));
+console.log(fun1({ min: 2, max: 4 }, 22));
 console.log(fun2({ min: 3, max: 3 }));
 
-//Interfaces
+/*interfaces*/
+//ساختاریا تایپ یک شی را برای ما تعیین میکنند در واقع چه متدهایی یا چه پراپرتی هایی داشته باشد
+// استفاده کنیم interface استفاده میکردیم که میتوانیم از جایگزین آن یعنی anonymous type قبلا برای تعیین ساختار یک شی از
 //در اینتر فیس فقط میتوان تعریف کرد نمیشود مقدار دهی کرد
 interface IPerson {
   name: string;
@@ -373,7 +382,7 @@ interface IPerson {
   password: string;
 }
 
-//نوع این متغیر از جنس یک interface هست
+// هست interface نوع این متغیر از جنس یک
 let myPerson: IPerson;
 myPerson = {
   name: "sad",
@@ -412,9 +421,11 @@ console.log(
   })
 );
 
+/*nullish coalescing and optional chaining*/
+
 //nullish coalescing(تعیین مقدار پیش فرض)
 let apiData = false;
-//با گذاشتن || مقدار پیش فرض به متغیر به جای null یا undefined یا '' یا false یا 0 قرار داده میشود
+// بود مقدار پیش فرض قرار میگیرد 0 یا false یا '' یا undefined یا null اگر مقدار || با گذاشتن
 let getApiData = apiData || "default value 1";
 //با گذاشتن ?? مقدار پیش فرض به متغیر به جای null یا undefined قرار داده میشود
 let getApiData2 = apiData ?? "default value 2";
@@ -423,7 +434,6 @@ console.log(getApiData2);
 
 //optional chaining
 //چک که آیا یک پراپرتی درون یک آبجکت وجود دارد یا نه
-
 let yy: any = {
   name: "asad",
   details: {
@@ -434,14 +444,16 @@ let yy: any = {
     },
   },
 };
-//چک اینکه مثلا پراپرتی fName وجود دارد یا نه
-console.log("optional chaining ==> ", yy.details?.fName);
+//???????????????
+// وجود دارد یا نه fName چک اینکه مثلا پراپرتی
+console.log("optional chaining ==> ", yy.details?.ff);
 
-//Type Aliases
-//این امکان را میدهد که جلوگیری کنیم از تکرار union type  و object type
+/*Type Aliases*/
+
+// union type و object type این امکان را میدهد که جلوگیری کنیم از تکرار
 //یک بار تعریف میکنیم و به هر چند تا متغییر که خواستیم اختصاص میدهیم
 //تایپ به شکل مستعار
-//union type
+//type alias with union type 
 type mID = string | number | null | undefined | boolean;
 
 function getMID(id: mID): mID {
@@ -451,11 +463,13 @@ function getMID(id: mID): mID {
 console.log(getMID(false));
 console.log(getMID("rew"));
 
-//object type
-//چون معمولا object type طولانی هستند میتوان از interface استفاده کنیم که البته میتوانیم از alias type هم استفاده کنیم
+// object type
+// استفاده کنیم alias type یا interface معمولا طولانی هستند میتوانیم از object type چون
+
+type iiio = [firstName: string, lastName: string]
 type myPerson = {
   //tuple type
-  fullName: [firstName: string, lastName: string];
+  fullName: iiio;
   details: {
     fName: string;
     account: {
@@ -488,36 +502,34 @@ console.log(
   })
 );
 
-//literal types
+/*literal types*/
+
 //در اصل تایپ نیستند بلکه مقدار هستند و تایپ یک متغیر را مقدار در نظر میگیریم
 //هر چیزی غیر از مقادیری که به عنوان تایپ در نظر گرفتیم به عنوان مقدار متغیر بنویسیم خطا میگیرد
 //مثلا تگ سلکت استفاده میشود
-//string literal type
-let yu: "ks" | "asd" | "dsad" | "1" = "asd";
+//union type in literal type, here is string literal type
+let yu: "ks" | "asd" | "dsad" | '12' = "asd";
 
 console.log(typeof yu, yu);
 
 //number literal type
+// ها استفاده کنیم enum بهتره از number literal type به جای
 let sss: 1 | 2 | 3;
-sss = 3;
+sss = 2;
 
-//boolean literal type
-//boolean literal typeخیلی کاربردی ندارد از همون boolean استفاده میکنیم
+// boolean literal type
+// استفاده کنیم boolean خیلی کاربردی ندارد بهتره از همون boolean literal type
 let isAc: true | false;
 
-//استفاده از type alias در literal type
+// type alias در literal type استفاده از
+type kkk = "e" | "w" | "q" | "h" ;
 
-type kkk = "e" | "w" | "q" | "h";
-
-let stwe: kkk;
+let stwe: kkk = 'e';
 let ref: kkk;
 
-ref = "q";
+ref ='q';
 
-//برای number literal بهتر است از enum استفاده کنیم که مفهومی تر شود چون در اونجا مقادیر دارای کلید هستند
-
-//ReadOnly Field
-
+/*ReadOnly Field*/
 interface Iuu {
   name: string;
   readonly age: number;
@@ -532,6 +544,7 @@ function getIuu(person: Iuu): Iuu {
 let erg = getIuu({ name: "asd", age: 2 });
 
 erg.name = "hhhhh";
+//age is readonly property so it can not be changed
 // erg.age = 2
 console.log(erg);
 
@@ -541,6 +554,7 @@ const oekwf = {
   name: "sad",
   family: "asd",
 } as const;
+// تبدیل شود readonly کنیم میبینیم که تمام اعضای اون آبجکت به حالت hover استفاده کردیم اگر روی نام خود آبجکت as const چون از
 // oekwf.name = 'asd'
 
 let mnm = ["asd", "sad", "asd"] as const;
@@ -549,7 +563,7 @@ let jkm: readonly number[] = [1, 2, 3];
 // mnm[0] = 'as'
 // jkm[2] = 2
 
-//function overloading
+/*function overloading*/
 
 //OOP(classes)
 //کلاس ها مدل سازی میکنن یک شی را بر اساس اطلاعات مورد نیاز
