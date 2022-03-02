@@ -21,7 +21,7 @@ ytyt = "dsf";
 // ytyt = 4
 
 let myF;
-// است .ما هر بار که مقدار دهی میکنیم میتواند نوع متغیر با توجه به مقداری که ما میدهیم تغییر کند any وعش مشخص نیست در واقع نوعش myf چون
+// است .ما هر بار که مقدار دهی میکنیم میتواند نوع متغیر با توجه به مقداری که ما میدهیم تغییر کند any نوعش مشخص نیست در واقع نوعش myf چون
 myF = "rgr";
 myF = 3;
 myF = true;
@@ -99,6 +99,7 @@ console.log(generateUniqID());
 let mngrg: string | boolean;
 //این متغییر میتواند فقط استرینگ یا بولین بگیرد هرچی دیگه بگیرد خطا میدهد
 mngrg = "2";
+mngrg = true;
 
 function opd(option: object | string[]): object | string[] {
   return Object.getOwnPropertyNames(option);
@@ -176,7 +177,7 @@ console.log(hUser(mUser));
 
 /*undefined and null types*/
 
-// پیش فرض است undefined مقدار دهی مشود ولی null
+// پیش فرض است undefined مقدار دهی می شود ولی null
 let aaa = null;
 let bbb;
 
@@ -372,7 +373,7 @@ console.log(fun1({ min: 2, max: 4 }, 22));
 console.log(fun2({ min: 3, max: 3 }));
 
 /*interfaces*/
-//ساختاریا تایپ یک شی را برای ما تعیین میکنند در واقع چه متدهایی یا چه پراپرتی هایی داشته باشد
+//ساختار یا تایپ یک شی را برای ما تعیین میکنند در واقع چه متدهایی یا چه پراپرتی هایی داشته باشد
 // استفاده کنیم interface استفاده میکردیم که میتوانیم از جایگزین آن یعنی anonymous type قبلا برای تعیین ساختار یک شی از
 //در اینتر فیس فقط میتوان تعریف کرد نمیشود مقدار دهی کرد
 interface IPerson {
