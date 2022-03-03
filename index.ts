@@ -1,3 +1,5 @@
+import { type } from "os";
+
 let user: string = "hamed";
 let age: number = 213;
 let isOnline: boolean = true;
@@ -712,6 +714,7 @@ class role {
 class admin extends role {
   constructor(id: number, name: string) {
     // super({ id: id, name: name, role: "admin" });
+    //????????????????????????????
     super({ id, name, role: "admin" });
   }
 }
@@ -869,7 +872,7 @@ todoMNModel.newToDo({ subject: "sadas", state: mnState.done });
 todoMNModel.newToDo({ subject: "ttttt", state: mnState.start });
 console.log(todoMNModel.getTodos());
 
-/*OOP(static member)*/  
+/*OOP(static member)*/
 //به عضوهایی گفته می شود که بدون نیاز به نمونه سازی از کلاسی به آن ها دسترسی داریم
 //عضوهای استاتیک هم میتوانند متد باشند هم پراپرتی
 //بارز ترین نمونه برای این موضوع Math
@@ -943,7 +946,7 @@ todoMNXModel.newToDo({ subject: "yyyyyy", state: mnState.failed });
 
 console.log(todoMNXModel.getTodos());
 
-//OOP(setter & getter)
+/*OOP(setter & getter)*/
 
 class GMClass {
   private name: string = "sad";
@@ -967,10 +970,12 @@ console.log(gmcClass.getName);
 gmcClass.setName = "david";
 console.log(gmcClass.getName);
 
-//OOP(read only member)
+/*OOP(read only member)*/
+
 class YHSClass {
   readonly name: string;
 
+  // هست constrcutor از طریق readonly تنها راه مقدار دهی یک پراپرتی
   constructor(name: string) {
     this.name = name;
   }
@@ -990,3 +995,184 @@ let yhsClass = new YHSClass("zero in one");
 
 console.log(yhsClass.name);
 console.log(yhsClass.getName);
+
+/*intersection type*/
+//این امکان را میدهد تا چندین تایپ را باهم ادغام و ترکیب کنیم و یک تایپ جدید رو ایجاد کنیم
+
+type bussinessType = {
+  name: string;
+  credit: number;
+};
+
+type identitiy = {
+  id: number;
+  name: string;
+};
+
+type contact = {
+  phone: number;
+  email: string;
+};
+
+//intersection type
+type mEmployee = identitiy & contact;
+type mCustomer = bussinessType & contact;
+type pPerson = identitiy & bussinessType;
+
+let Eemployee: mEmployee = {
+  id: 212,
+  name: "asd",
+  email: "asds@yahoo.com",
+  phone: 2132,
+};
+
+let cCustomer: mCustomer = {
+  name: "sad",
+  credit: 321,
+  email: "sad",
+  phone: 231,
+};
+
+// چون وجه اشتراک بود یک بار نوشته میشود name
+let cC: pPerson = {
+  id: 2,
+  name: "asd",
+  credit: 2,
+};
+
+type nameOrAge = string | number;
+type mActive = boolean | number;
+
+//intersection type
+// ها استفاده کنیم وجه اشتراک دو تایپ قبلی رو به عنوان تایپ استفاده میکند و رشته و بولین حذف میشود union type در حالتی که از
+type combine = nameOrAge & mActive;
+
+let mCombine: combine = 2;
+
+type nameOrAge1 = string | null;
+type mActive1 = boolean | number;
+
+//intersection type
+// میشود never بالایی وجه اشتراکی وجود ندارد پس تایپ union type در دو
+type combine1 = nameOrAge1 & mActive1;
+
+/*type guards*/
+
+// 1 : typeof
+type alpha = string | number;
+
+function MCH(a: alpha, b: alpha): alpha {
+  if (typeof a === "string" && typeof b === "string") {
+    return a.concat(b);
+  }
+
+  if (typeof a === "number" && typeof b === "number") {
+    return a + b;
+  }
+
+  throw new Error("type guard is on!!!, please check type parameter");
+}
+
+console.log(MCH("h", "g"));
+console.log(MCH(2, 5));
+// console.log(MCH(4, "dd"));
+
+// 2 : instanceof
+//معمولا برای اشیا و کلاس ها به کار برده میشود. اگر بخوایم ببینیم ورودی ما نمونه ای از یک کلاس هست یا نه از این استفاده میکنیم
+
+class myEmployee {
+  isEmployeeIsRegistered(): boolean {
+    return true;
+  }
+}
+
+class myCustomer {
+  isCustomerIsAllowed(): boolean {
+    return false;
+  }
+}
+
+type bbbPar = myEmployee | myCustomer;
+
+function signCon(partner: bbbPar) {
+  if (partner instanceof myEmployee) {
+    return partner.isEmployeeIsRegistered()
+      ? "employee is registered"
+      : "employee is not registered";
+  }
+
+  if (partner instanceof myCustomer) {
+    return partner.isCustomerIsAllowed()
+      ? "customer is allwed"
+      : "customer is not allowed";
+  }
+
+  throw new Error("type guard is on!!!, please check type parameter");
+
+}
+
+
+let uuu : bbbPar = new myEmployee()
+console.log(signCon(uuu));
+
+console.log(signCon(new myCustomer()));
+
+// 3 : in
+// با این تفاوت که درون کلاس چک میکنه یک شی را درون شی دیگر instanceof مشابه
+
+function signCon2(partner: bbbPar) {
+  if ('isEmployeeIsRegistered' in partner) {
+    return partner.isEmployeeIsRegistered()
+      ? "employee is registered"
+      : "employee is not registered";
+  }
+
+  if ('isCustomerIsAllowed' in partner) {
+    return partner.isCustomerIsAllowed()
+      ? "customer is allwed"
+      : "customer is not allowed";
+  }
+
+  throw new Error("type guard is on!!!, please check type parameter");
+
+}
+
+
+let uuu2 : bbbPar = new myEmployee()
+console.log(signCon(uuu2));
+
+console.log(signCon(new myCustomer()));
+
+// 4 : user-defined type guard
+
+function isMyEmployee(partner: bbbPar) : partner is myEmployee {
+  return partner instanceof myEmployee
+}
+
+function isMyCustomer(partner: bbbPar) : partner is myCustomer {
+  return partner instanceof myCustomer
+}
+
+
+
+function signCon3(partner: bbbPar) {
+  if (isMyEmployee(partner)) {
+    return partner.isEmployeeIsRegistered()
+      ? "employee is registered"
+      : "employee is not registered";
+  }
+
+  if (isMyCustomer(partner)) {
+    return partner.isCustomerIsAllowed()
+      ? "customer is allwed"
+      : "customer is not allowed";
+  }
+
+  throw new Error("type guard is on!!!, please check type parameter");
+
+}
+
+let uuu3 : bbbPar = new myEmployee()
+console.log(signCon(uuu3));
+
+console.log(signCon(new myCustomer()));
