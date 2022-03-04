@@ -1,5 +1,3 @@
-import { type } from "os";
-
 let user: string = "hamed";
 let age: number = 213;
 let isOnline: boolean = true;
@@ -14,7 +12,7 @@ if (typeof age !== "number") {
   console.log("nok");
 }
 
-//type inference
+/*type inference*/
 // استفاده میکند (تشخیص اتوماتیک نوع داده)...نوع داده را نگذاریم خودش بر اساس مقداری که دادیم نوعش را تعیین میکند و بعدا امکان تغییر نوع داده وجود ندارد type inference از typescript در
 // در جاوااسکریپت این قضیه صدق نمیکند و در هر لحظه میشود با مقدار دادن به متغیر نوع داده را عوض کنیم
 let ytyt = "fff";
@@ -227,7 +225,7 @@ function catchError(): never {
 
 //یکی دیگر از کاربردها در حلقه های بینهایت استفاده میشود
 function infinitLoop(): never {
-  while (true) {}
+  while (true) { }
 }
 
 //تفاوت never و void
@@ -838,7 +836,7 @@ abstract class mnxRepo implements IITodoOperation {
 
   protected abstract make(): void;
 
-  deleteTodo(subject: string): void {}
+  deleteTodo(subject: string): void { }
 
   newTodo(todo: IITodo): todo {
     return todo;
@@ -894,7 +892,7 @@ abstract class mnxxRepo implements IITodoOperation {
 
   protected abstract make(): void;
 
-  deleteTodo(subject: string): void {}
+  deleteTodo(subject: string): void { }
 
   newTodo(todo: todoII): todo {
     return todo;
@@ -1108,11 +1106,9 @@ function signCon(partner: bbbPar) {
   }
 
   throw new Error("type guard is on!!!, please check type parameter");
-
 }
 
-
-let uuu : bbbPar = new myEmployee()
+let uuu: bbbPar = new myEmployee();
 console.log(signCon(uuu));
 
 console.log(signCon(new myCustomer()));
@@ -1121,39 +1117,35 @@ console.log(signCon(new myCustomer()));
 // با این تفاوت که درون کلاس چک میکنه یک شی را درون شی دیگر instanceof مشابه
 
 function signCon2(partner: bbbPar) {
-  if ('isEmployeeIsRegistered' in partner) {
+  if ("isEmployeeIsRegistered" in partner) {
     return partner.isEmployeeIsRegistered()
       ? "employee is registered"
       : "employee is not registered";
   }
 
-  if ('isCustomerIsAllowed' in partner) {
+  if ("isCustomerIsAllowed" in partner) {
     return partner.isCustomerIsAllowed()
       ? "customer is allwed"
       : "customer is not allowed";
   }
 
   throw new Error("type guard is on!!!, please check type parameter");
-
 }
 
-
-let uuu2 : bbbPar = new myEmployee()
+let uuu2: bbbPar = new myEmployee();
 console.log(signCon(uuu2));
 
 console.log(signCon(new myCustomer()));
 
 // 4 : user-defined type guard
 
-function isMyEmployee(partner: bbbPar) : partner is myEmployee {
-  return partner instanceof myEmployee
+function isMyEmployee(partner: bbbPar): partner is myEmployee {
+  return partner instanceof myEmployee;
 }
 
-function isMyCustomer(partner: bbbPar) : partner is myCustomer {
-  return partner instanceof myCustomer
+function isMyCustomer(partner: bbbPar): partner is myCustomer {
+  return partner instanceof myCustomer;
 }
-
-
 
 function signCon3(partner: bbbPar) {
   if (isMyEmployee(partner)) {
@@ -1169,10 +1161,10 @@ function signCon3(partner: bbbPar) {
   }
 
   throw new Error("type guard is on!!!, please check type parameter");
-
 }
 
-let uuu3 : bbbPar = new myEmployee()
+let uuu3: bbbPar = new myEmployee();
 console.log(signCon(uuu3));
 
 console.log(signCon(new myCustomer()));
+

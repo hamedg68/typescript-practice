@@ -4,7 +4,8 @@
   "description": "hamed typescript",
   "main": "index.js",
   "scripts": {
-    "start": "npx ts-node index.ts"
+    "s": "npx ts-node index.ts",
+    "g": "npx ts-node generics.ts"
   },
   "author": "",
   "license": "ISC",
