@@ -28,6 +28,7 @@ function Logger2(): any {
   };
 }
 
+
 // @ با علامت decorator صدا زدن
 @Logger2()
 class Log2 {
