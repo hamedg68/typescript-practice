@@ -994,6 +994,7 @@ let yhsClass = new YHSClass("zero in one");
 console.log(yhsClass.name);
 console.log(yhsClass.getName);
 
+
 /*intersection type*/
 //این امکان را میدهد تا چندین تایپ را باهم ادغام و ترکیب کنیم و یک تایپ جدید رو ایجاد کنیم
 
