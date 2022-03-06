@@ -287,21 +287,21 @@ type IIUser = {
 };
 
 // 1 : partial
-//همه پراپرتی های یک تایپ رو به صورت اختیاری تبدیل میکند
-//با هاور کردن روی این تایپ میبینی که همه اختیاری شده
+//همه پراپرتی های یک تایپ رو به صورت اختیاری تبدیل می کند
+//با هاور کردن روی این تایپ می بینی که همه اختیاری شده
 type opIIUser = Partial<IIUser>;
 
 // 2 : required
-//همه پراپرتی های یک تایپ رو به صورت الزامی تبدیل میکند
-//با هاور کردن روی این تایپ میبینی که همه الزامی شده
+//همه پراپرتی های یک تایپ رو به صورت الزامی تبدیل می‌ کند
+//با هاور کردن روی این تایپ می بینی که همه الزامی شده
 type opIIIUser = Required<IIUser>;
 
 // 3 : readonly
-//همه پراپرتی های یک تایپ رو به صورت  فقط خواندی تبدیل میکند
-//با هاور کردن روی این تایپ میبینی که همه فقط خواندنی شده
+//همه پراپرتی های یک تایپ رو به صورت  فقط خواندی تبدیل می کند
+//با هاور کردن روی این تایپ می بینی که همه فقط خواندنی شده
 type opIIIIUser = Readonly<IIUser>;
 
-// 4 : recored
+// 4 : record
 // V(value) و K(key) دو تایپ را دریافت میکند یکی
 
 type names = "ali" | "reza" | "hasan";
@@ -317,17 +317,18 @@ let mData: data = {
 };
 
 // 5 : pick
-//یک گزینه رو انتخاب میکند
+//یک گزینه رو انتخاب می کند
 
 type ID = Pick<IIUser, "id">;
 // union type استفاده از
 type IDD = Pick<IIUser, "id" | "email">;
 
-// 6 : ommit
-// حذف میکند و بقیه رو میدهد برعکس بالایی
+// 6 : omit
+// حذف میکند و بقیه رو می دهد برعکس بالایی
 
 type CCC = Omit<IIUser, "id">;
 // union type استفاده از
+//استفاده 
 type CCCI = Omit<IIUser, "id" | "age">;
 
 // 7 : exclude
@@ -347,8 +348,8 @@ type newType = NonNullable<GVB>;
 
 // 10 : parameter
 // tuple type تبدیل به
-const addtion = (a: number, b: number) => {
+const addition = (a: number, b: number) => {
   return a + b;
 };
 
-type ttl = Parameters<typeof addtion>;
+type ttl = Parameters<typeof addition>;
