@@ -138,3 +138,5 @@ class testAge{
 let TA = new testAge()
 
 console.log(TA.age);
+
+
