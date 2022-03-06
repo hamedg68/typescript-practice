@@ -70,8 +70,6 @@ function mergeInfoII<T extends object, U extends object>(
   };
 }
 
-
-
 console.log(
   mergeInfoII<object, object>({ id: 1, name: 2 }, { phone: 212, email: "asd" })
 );
