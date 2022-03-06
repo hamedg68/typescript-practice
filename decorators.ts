@@ -10,6 +10,7 @@ function Logger(message: string): any {
   console.log(message);
 }
 
+
 // @ با علامت decorator صدا زدن
 @Logger("logger messages decorator ...")
 class Log {
