@@ -56,6 +56,7 @@ console.log(
   )
 );
 
+
 /*constraint in generics*/
 // ها generic محدودیت در
 
