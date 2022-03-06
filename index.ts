@@ -1109,6 +1109,7 @@ function signCon(partner: bbbPar) {
   throw new Error("type guard is on!!!, please check type parameter");
 }
 
+
 let uuu: bbbPar = new myEmployee();
 console.log(signCon(uuu));
 
