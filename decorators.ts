@@ -43,6 +43,7 @@ class Log2 {
 4 : argument(parameter) decorator
 */
 
+
 /*class decorator*/
 function component(target: Function) {
   target.prototype.msg = "message has been initialized!";
