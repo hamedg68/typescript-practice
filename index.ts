@@ -1113,6 +1113,7 @@ function signCon(partner: bbbPar) {
 
 
 
+
 let uuu: bbbPar = new myEmployee();
 console.log(signCon(uuu));
 
