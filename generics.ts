@@ -93,6 +93,7 @@ console.log(getRandomItem<Array<number>>([1, 4, 5]));
 
 /*generic types in interfaces*/
 
+
 interface MPair<T, U> {
   key: T;
   value: U;
