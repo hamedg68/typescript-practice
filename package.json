@@ -6,7 +6,8 @@
   "scripts": {
     "s": "npx ts-node index.ts",
     "g": "npx ts-node generics.ts",
-    "d": "npx ts-node decorators.ts"
+    "d": "npx ts-node decorators.ts",
+    "m": "npx ts-node modules.ts"
   },
   "author": "",
   "license": "ISC",

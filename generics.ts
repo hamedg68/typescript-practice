@@ -331,7 +331,6 @@ type IDD = Pick<IIUser, "id" | "email">;
 
 type CCC = Omit<IIUser, "id">;
 // union type استفاده از
-//استفاده 
 type CCCI = Omit<IIUser, "id" | "age">;
 
 // 7 : exclude

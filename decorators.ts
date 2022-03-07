@@ -4,6 +4,8 @@
 // میتونه بر روی کلاس محدودیت ایجاد کنه
 //میتونه بر روی متد ها تاثیر بگذارد
 
+import { type } from "os";
+
 // همون فانکشن معمول است decorator ساده ترین
 
 function Logger(message: string): any {
@@ -41,7 +43,6 @@ class Log2 {
 3 : property decorator
 4 : argument(parameter) decorator
 */
-
 
 /*class decorator*/
 function component(target: Function) {
@@ -123,27 +124,104 @@ function constraintAge({ min, max }: { min: number; max: number }) {
     const getter = () => value;
 
     Object.defineProperty(target, propertyKey, {
-        set: setter,
-        get: getter,
-      });
+      set: setter,
+      get: getter,
+    });
   };
 }
 
-
-class testAge{
-
-    @constraintAge({min : 12 , max : 22})
-    age : number = 20
+class testAge {
+  @constraintAge({ min: 12, max: 22 })
+  age: number = 20;
 }
 
+let TA = new testAge();
 
-let TA = new testAge()
-
-<<<<<<< HEAD
-
-=======
->>>>>>> testB
 console.log(TA.age);
 
-
 /*method decorator*/
+
+/*parameter decorator*/
+
+/*mapped types*/
+interface info {
+  id: number;
+  readonly name: string;
+  location?: string;
+  age: number;
+}
+
+// mapped type با استفاده از optional تبدیل تمام پراپرتی ها به
+type optional<T> = {
+  [property in keyof T]?: T[property];
+};
+
+type getInfo = optional<info>;
+//or use utility type partial
+type getInfo2 = Partial<info>;
+
+//convert every property which is optional to required
+type requiredProp<type> = {
+  [property in keyof type]-?: type[property];
+};
+
+type getR = requiredProp<info>;
+
+//read only
+type readonlyP<T> = {
+  readonly [property in keyof T]: T[property];
+};
+
+type getRE = readonlyP<info>;
+
+type getRE2 = readonlyP<requiredProp<info>>;
+
+//convert every property which is readonly to not readonly
+type nonReadonlyP<T> = {
+  -readonly [property in keyof T]: T[property];
+};
+
+type getNRE = nonReadonlyP<info>;
+
+// ها ساخته شده mapped type ها از utility type در واقع همه
+
+interface myInfo {
+  id: number;
+  name: string;
+  location: string;
+  age: number;
+}
+
+//convert every property to function which returns void
+type functionPropertyM<T> = {
+  [prop in keyof T]: () => void;
+};
+
+type methodInfo = functionPropertyM<myInfo>;
+
+//convert every property to boolean
+type isExist<T> = {
+  [prop in keyof T]: boolean;
+};
+
+type mBoolean = isExist<myInfo>;
+
+let test: mBoolean;
+test = {
+  id: true,
+  name: true,
+  location: false,
+  age: false,
+};
+
+type usefulMethod<T> = {
+  // گفته نشد utility type حرف اول هر کلمه رو بزرگ میکند در قسمت آموزش utility type Capitalize
+  [prop in keyof T as `get${Capitalize<string & prop>}`]: () => T[prop];
+};
+
+type listOfMethod = usefulMethod<myInfo>;
+
+
+/*modules*/
+// ها از زیاد شدن کدها در یک فایل جلوگیری میکند module
+//میتوانیم کدهای خود را تقسیم بندی کنیم و درون چندین فایل قرار بدیم و در هنگام نیاز از اون فایل ها استفاده کنیم
