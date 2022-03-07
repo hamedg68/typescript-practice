@@ -1008,7 +1008,6 @@ type identitiy = {
   name: string;
 };
 
-
 type contact = {
   phone: number;
   email: string;
