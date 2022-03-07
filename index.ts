@@ -1018,6 +1018,7 @@ type mEmployee = identitiy & contact;
 type mCustomer = bussinessType & contact;
 type pPerson = identitiy & bussinessType;
 
+
 let Eemployee: mEmployee = {
   id: 212,
   name: "asd",
