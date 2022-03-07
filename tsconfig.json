@@ -1,11 +1,18 @@
 {
-    "compilerOptions": {
-      "outDir": "./dist",
-      "rootDir": "./" ,
-      /* Experimental Options */
-      "experimentalDecorators": true, 
-      "emitDecoratorMetadata": true, 
-      /* Advanced Options */
-      "forceConsistentCasingInFileNames": true 
-    }
+  "compilerOptions": {
+    "target": "ES5",
+    "allowJs": true,
+    "checkJs": true,
+    "outDir": "./dist",
+    "rootDir": "./",
+    "strict": false,
+    "noImplicitAny": false,
+    /* Experimental Options */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    /* Advanced Options */
+    "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false,
+    "removeComments": false
   }
+}

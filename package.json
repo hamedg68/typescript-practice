@@ -7,7 +7,8 @@
     "s": "npx ts-node index.ts",
     "g": "npx ts-node generics.ts",
     "d": "npx ts-node decorators.ts",
-    "m": "npx ts-node modules.ts"
+    "m": "npx ts-node modules.ts",
+    "p": "npx ts-node database/app.ts"
   },
   "author": "",
   "license": "ISC",
