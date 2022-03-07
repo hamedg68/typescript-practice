@@ -136,7 +136,9 @@ class testAge{
     age : number = 20
 }
 
+
 let TA = new testAge()
+
 
 console.log(TA.age);
 
