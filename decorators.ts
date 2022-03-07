@@ -139,7 +139,10 @@ class testAge{
 
 let TA = new testAge()
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> testB
 console.log(TA.age);
 
 
