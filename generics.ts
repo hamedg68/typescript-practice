@@ -308,7 +308,7 @@ type opIIIIUser = Readonly<IIUser>;
 // V(value) و K(key) دو تایپ را دریافت میکند یکی
 
 type names = "ali" | "reza" | "hasan";
-
+let hhh : names = 'reza'
 type detail = { id: number; name: string; age: number };
 
 type data = Record<names, detail>;
@@ -318,6 +318,9 @@ let mData: data = {
   reza: { id: 2, name: "fff", age: 44 },
   hasan: { id: 3, name: "tht", age: 23 },
 };
+
+console.log('%%%%%_____%%%%%   ',mData['ali']);
+console.log('%%%%%_____%%%%%   ',hhh['reza']);
 
 // 5 : pick
 //یک گزینه رو انتخاب می کند
