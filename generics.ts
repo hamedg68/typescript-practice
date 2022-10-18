@@ -69,7 +69,6 @@ function mergeInfoII<T extends object, U extends object>(
   };
 }
 
-
 console.log(
   mergeInfoII<object, object>({ id: 1, name: 2 }, { phone: 212, email: "asd" })
 );
@@ -91,12 +90,10 @@ console.log(getRandomItem<Array<number>>([1, 4, 5]));
 
 /*generic types in interfaces*/
 
-
 interface MPair<T, U> {
   key: T;
   value: U;
 }
-
 
 let MPV: MPair<string, Array<string>>;
 
@@ -308,7 +305,7 @@ type opIIIIUser = Readonly<IIUser>;
 // V(value) و K(key) دو تایپ را دریافت میکند یکی
 
 type names = "ali" | "reza" | "hasan";
-let hhh : names = 'reza'
+let hhh: names = "reza";
 type detail = { id: number; name: string; age: number };
 
 type data = Record<names, detail>;
@@ -319,8 +316,10 @@ let mData: data = {
   hasan: { id: 3, name: "tht", age: 23 },
 };
 
-console.log('%%%%%_____%%%%%   ',mData['ali']);
-console.log('%%%%%_____%%%%%   ',hhh['reza']);
+let jj: Record<string, number> = { 1: 2 };
+
+console.log("%%%%%_____%%%%%   ", mData["ali"]);
+console.log("%%%%%_____%%%%%   ", hhh["reza"]);
 
 // 5 : pick
 //یک گزینه رو انتخاب می کند
