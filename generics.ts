@@ -49,6 +49,7 @@ function mergeInfo<T, U>(args1: T, args2: U): T & U {
   };
 }
 
+
 console.log(
   mergeInfo<IID, CContact>(
     { id: 1, name: "hamed" },
