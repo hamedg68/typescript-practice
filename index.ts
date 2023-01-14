@@ -1118,6 +1118,7 @@ console.log(signCon(new myCustomer()));
 // 3 : in
 // با این تفاوت که درون کلاس چک میکنه یک شی را درون شی دیگر instanceof مشابه
 
+
 function signCon2(partner: bbbPar) {
   if ("isEmployeeIsRegistered" in partner) {
     return partner.isEmployeeIsRegistered()
